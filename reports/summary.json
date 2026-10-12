@@ -1,0 +1,122 @@
+{
+  "quality": {
+    "rows": 64000,
+    "missing_cells": 0,
+    "duplicate_profiles": 7791,
+    "duplicate_full_rows": 6562,
+    "note": "No customer ID: identical profiles are flagged, never automatically removed."
+  },
+  "randomization": {
+    "counts": {
+      "Mens E-Mail": 21307,
+      "Womens E-Mail": 21387,
+      "No E-Mail": 21306
+    },
+    "srm_chi2": 0.20253125000000002,
+    "srm_p_value": 0.9036929575604196,
+    "expected_allocation": "1:1:1",
+    "srm_flag": false
+  },
+  "binary_rows": 42613,
+  "max_abs_smd": 0.016359543173779502,
+  "ate_conversion": {
+    "control_rate": 0.005726086548390125,
+    "treatment_rate": 0.01253109306800582,
+    "ate": 0.006805006519615695,
+    "ci_low": 0.005000129025231786,
+    "ci_high": 0.008609884013999603,
+    "n_control": 21306,
+    "n_treatment": 21307
+  },
+  "ate_visit_secondary": {
+    "control_rate": 0.10616727682343002,
+    "treatment_rate": 0.18275684047496127,
+    "ate": 0.07658956365153125,
+    "ci_low": 0.06995334548485052,
+    "ci_high": 0.08322578181821197,
+    "n_control": 21306,
+    "n_treatment": 21307
+  },
+  "ate_spend_revenue": {
+    "control_rate": 0.6527893551112361,
+    "treatment_rate": 1.422616511005773,
+    "ate": 0.7698271558945368,
+    "ci_low": 0.48514912892878365,
+    "ci_high": 1.0545051828602898,
+    "n_control": 21306,
+    "n_treatment": 21307
+  },
+  "split_sizes": {
+    "train": 25567,
+    "validation": 8523,
+    "test": 8523
+  },
+  "selected_on_validation": {
+    "policy": "all",
+    "fraction": 1.0,
+    "net_per_customer": 0.2871876099964804,
+    "ci_low": 0.07532033361437329,
+    "ci_high": 0.4990548863785875,
+    "net_per_1000": 287.18760999648043,
+    "coverage": 1.0,
+    "incremental_conversions_per_1000": 7.743752199929602
+  },
+  "paired_test_comparisons": {
+    "no contact": {
+      "net_per_customer": 0.21678986272439316,
+      "ci_low": 0.012494083132400968,
+      "ci_high": 0.42108564231638534,
+      "net_per_1000": 216.78986272439315
+    },
+    "contact all": {
+      "net_per_customer": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "net_per_1000": 0.0
+    },
+    "random same coverage": {
+      "net_per_customer": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "net_per_1000": 0.0
+    }
+  },
+  "config": {
+    "seed": 42,
+    "iterations": 250,
+    "value": 50.0,
+    "cost": 0.1,
+    "fractions": [
+      0.1,
+      0.2,
+      0.3,
+      0.5,
+      0.7,
+      1.0
+    ],
+    "propensity": 0.5
+  },
+  "feature_names": [
+    "recency",
+    "history_segment",
+    "history",
+    "mens",
+    "womens",
+    "zip_code",
+    "newbie",
+    "channel",
+    "log_history",
+    "history_per_recency",
+    "bought_both_categories"
+  ],
+  "data_sha256": "9bd6dd74628d14b652cef843df5e52c07f9024706dc00ece13855a85c4543b41",
+  "versions": {
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.6.1",
+    "scikit-uplift": "0.5.1",
+    "catboost": "1.2.10"
+  },
+  "decision": "Use contact-all as the candidate for a prospective campaign test under these economics. Validation selected this simple strategy and held-out net value versus no contact is positive with an approximate 95% interval above zero. ML targeting was not selected. Contact-all and random at 100% are the same rule, so their zero paired differences are identities, not failed superiority tests."
+}
