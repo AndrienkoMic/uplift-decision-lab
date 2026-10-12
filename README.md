@@ -10,6 +10,19 @@ conversations: the outcome is an evidence-based recommendation, even when ML add
 | --- | --- | --- |
 | Allocation checks, balance, data quality, ATE and uncertainty | Pre-treatment features, CatBoost S/T learners, response baseline, held-out Qini and AUUC | Reach selection, incremental net value, simple policy comparisons and risk |
 
+## Two case studies
+
+| Case | Decision | Added challenge | Report |
+| --- | --- | --- | --- |
+| Hillstrom email | Send to everyone or target a share? | Rare purchases, randomized experiment, simple economics | [Email report](reports/report.md) |
+| X5 RetailHero contact | Can uplift ranking improve on RFM at a contact budget? | Receipt-level feature engineering, customer joins, source-design uncertainty | [contact report](reports/x5/report.md) |
+
+X5 is a conditional policy benchmark: the available public sources do not provide a complete
+assignment protocol. Its IPW evaluation explicitly assumes 50:50 random assignment; balance
+and allocation checks do not verify this. Hillstrom retains its documented randomized design.
+The cases use different outcome definitions and assumed currencies; their profits are not
+directly comparable.
+
 ## The decision
 
 Should a retailer send a promotional email to everyone, to a random share, or to customers
@@ -138,6 +151,48 @@ docs/interview_story.md      talking points and prompts for your real work exper
 run.py                      one-command end-to-end analysis
 uv.lock                     exact cross-platform dependency resolution
 ```
+
+## X5 RetailHero: purchase history to contact targeting
+
+The default run selects contact-all on validation. Held-out estimated net value is
+1,359 RUB per 1,000 eligible customers, with an approximate 95% interval of −184 to 2,903 RUB.
+The interval includes zero; positive economic value is not established. ML targeting was
+not selected. These estimates depend on assumed random assignment and scenario economics.
+
+```sh
+uv run python run_x5.py
+```
+
+The first run downloads about 647 MiB across three verified files and scans the item-level
+purchase history with DuckDB. It first forms receipts, then customer features; repeated
+receipt totals are never summed across item rows. The aggregate cache makes later runs faster. The final model inputs are also saved locally as
+data/x5/customer_features.parquet: one row per labeled customer, client ID plus 16 features,
+without treatment or outcome columns.
+Allow several GB of free disk for raw data, the environment and optional spill. DuckDB defaults
+to a 2 GB aggregation memory limit; this does not cap total Python/CatBoost memory.
+
+```sh
+uv run python run_x5.py --memory-limit 1GB
+uv run python run_x5.py --value 100 --cost 5 --output reports/x5_cost_5
+```
+
+Default scenario: **100 RUB assumed contribution per incremental purchase**, **2 RUB per intended
+contact**. Models compete with an equal-weight RFM ranking whose percentile reference is fitted
+on training customers only. Features include receipt recency/frequency, past spend, mean basket,
+recent activity and store breadth; customer identifiers and post-treatment outcomes are excluded.
+No post-treatment basket margin is available; past spend never substitutes for future profit.
+
+`run_x5.py`, `src/x5.py`, [the X5 notebook](notebooks/x5_exploration.ipynb),
+and [design notes](docs/x5_design.md) keep this second case separate from the email report.
+Local customer-level outputs under `reports/x5/` stay outside Git; summary tables and charts
+are published. Data/source SHA-256 values, feature anchor, model settings and package versions
+are recorded in the report manifest.
+
+The labeled 200,039-customer sample is split into train/validation/test. The competition's
+unlabeled test is not used for policy-value claims. Lapsed/frequent segment thresholds use
+training features, with exploratory outcome differences evaluated on test. The source documents
+purchase history before communication but does not give a verifiable campaign cutoff or exact
+outcome-window duration; neither is invented by this project.
 
 ## Verification
 

@@ -13,3 +13,5 @@ reports/splits.csv
 .git-initial/
 .token-optimizer/
 .repro-check/
+reports/x5/holdout_predictions.csv
+reports/x5/splits.csv

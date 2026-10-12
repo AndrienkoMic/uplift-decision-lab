@@ -32,7 +32,7 @@ def make_mask(name, fraction, scores, n):
     return top_k(np.zeros(n) if name == "random" else scores[name], fraction)
 
 
-def figures(out, test, scores, policy_table, balance):
+def figures(out, test, scores, policy_table, balance, currency="USD", channel="email"):
     plt.rcParams.update(
         {
             "font.family": "DejaVu Sans",
@@ -41,7 +41,7 @@ def figures(out, test, scores, policy_table, balance):
             "axes.spines.right": False,
         }
     )
-    palette = ["#0d9488", "#6366f1", "#f59e0b"]
+    palette = ["#0d9488", "#6366f1", "#f59e0b", "#e11d48"]
     fig, ax = plt.subplots(figsize=(9, 5), layout="constrained")
     for (name, score), color in zip(scores.items(), palette):
         x, gain = get_qini(test.conversion, test.treatment, score)
@@ -82,8 +82,8 @@ def figures(out, test, scores, policy_table, balance):
     ax.axvline(0, color="#94a3b8", ls="--")
     ax.set_yticks(np.arange(len(table)), table.label)
     ax.set(
-        xlabel="Incremental net value per 1,000 eligible customers (assumed USD)",
-        title="A profitable campaign need not require an uplift model | 95% intervals",
+        xlabel=f"Incremental net value per 1,000 eligible customers (assumed {currency})",
+        title="Estimated policy value under assumed economics | 95% intervals",
     )
     fig.savefig(out / "figures/policy_value.png", dpi=180)
     plt.close(fig)
@@ -94,7 +94,7 @@ def figures(out, test, scores, policy_table, balance):
     ax.axvline(-0.1, ls="--", color="#94a3b8")
     ax.axvline(0.1, ls="--", color="#94a3b8")
     ax.set(
-        xlabel="Standardized mean difference: email minus control",
+        xlabel=f"Standardized mean difference: {channel} minus control",
         title="Pre-treatment balance | 0.1 is a heuristic, not a randomization proof",
     )
     fig.savefig(out / "figures/balance.png", dpi=180)
