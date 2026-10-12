@@ -1,0 +1,158 @@
+{
+  "dataset": "x5",
+  "quality": {
+    "receipt_count": 4024949,
+    "history_start": "2018-11-21 21:02:33",
+    "eligible_item_lines": 22882690,
+    "history_end": "2019-03-18 23:19:28",
+    "feature_reference_date": "2019-03-19 00:00:00",
+    "reference_note": "Day after latest provided pre-communication receipt; not the campaign date or an observed outcome-window boundary.",
+    "cache_key": {
+      "schema_version": 2,
+      "sources": {
+        "uplift_train.csv.gz": {
+          "url": "https://sklift.s3.eu-west-2.amazonaws.com/uplift_train.csv.gz",
+          "sha256": "0a218e864a1ec1dfe26e980a082b81d5f46d199c4a6ae32abbaa95265af1c2c7",
+          "bytes": 1182423
+        },
+        "clients.csv.gz": {
+          "url": "https://sklift.s3.eu-west-2.amazonaws.com/clients.csv.gz",
+          "sha256": "bfca1719b862735ae9816ed9bbba6924931c6a4dff761c481efe9addff458429",
+          "bytes": 7637755
+        },
+        "purchases.csv.gz": {
+          "url": "https://sklift.s3.eu-west-2.amazonaws.com/purchases.csv.gz",
+          "sha256": "3d57519fa92b553fd1e947c120add475cc42e0c64c323a52cef5aebe8645c8e2",
+          "bytes": 669979268
+        }
+      }
+    },
+    "source_hashes": {
+      "uplift_train.csv.gz": {
+        "url": "https://sklift.s3.eu-west-2.amazonaws.com/uplift_train.csv.gz",
+        "sha256": "0a218e864a1ec1dfe26e980a082b81d5f46d199c4a6ae32abbaa95265af1c2c7",
+        "bytes": 1182423
+      },
+      "clients.csv.gz": {
+        "url": "https://sklift.s3.eu-west-2.amazonaws.com/clients.csv.gz",
+        "sha256": "bfca1719b862735ae9816ed9bbba6924931c6a4dff761c481efe9addff458429",
+        "bytes": 7637755
+      },
+      "purchases.csv.gz": {
+        "url": "https://sklift.s3.eu-west-2.amazonaws.com/purchases.csv.gz",
+        "sha256": "3d57519fa92b553fd1e947c120add475cc42e0c64c323a52cef5aebe8645c8e2",
+        "bytes": 669979268
+      }
+    },
+    "labeled_clients": 200039,
+    "clients_without_history": 0,
+    "ages_missing_or_outside_14_100": 883,
+    "missing_gender": 0
+  },
+  "assignment_status": "50:50 random assignment assumed; protocol unverified",
+  "allocation": {
+    "counts": {
+      "0": 100058,
+      "1": 99981
+    },
+    "p_value": 0.8633113903439603
+  },
+  "max_abs_smd": 0.009445114474152366,
+  "purchase_difference": {
+    "control_rate": 0.6032800975434248,
+    "treatment_rate": 0.6365109370780448,
+    "ate": 0.03323083953462003,
+    "ci_low": 0.0289789917404354,
+    "ci_high": 0.03748268732880465,
+    "n_control": 100058,
+    "n_treatment": 99981
+  },
+  "selected_on_validation": {
+    "policy": "all",
+    "fraction": 1.0,
+    "net_per_customer": 1.7992401519696062,
+    "ci_low": 0.25353071638933167,
+    "ci_high": 3.3449495875498805,
+    "net_per_1000": 1799.2401519696061,
+    "coverage": 1.0,
+    "incremental_conversions_per_1000": 37.99240151969606
+  },
+  "paired_test_comparisons": {
+    "no contact": {
+      "net_per_customer": 1.3593281343731254,
+      "ci_low": -0.18417956048314177,
+      "ci_high": 2.9028358292293923,
+      "net_per_1000": 1359.3281343731253
+    },
+    "contact all": {
+      "net_per_customer": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "net_per_1000": 0.0
+    },
+    "random same coverage": {
+      "net_per_customer": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "net_per_1000": 0.0
+    },
+    "RFM same coverage": {
+      "net_per_customer": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "net_per_1000": 0.0
+    }
+  },
+  "split_sizes": {
+    "train": 120023,
+    "validation": 40008,
+    "test": 40008
+  },
+  "segment_thresholds_training_only": {
+    "recency_75pct": 10.0,
+    "frequency_median": 15.0
+  },
+  "feature_names": [
+    "age",
+    "transactions",
+    "total_spend",
+    "mean_basket",
+    "recency_days",
+    "active_days",
+    "history_days",
+    "transactions_30d",
+    "spend_30d",
+    "spend_share_30d",
+    "mean_items",
+    "store_count",
+    "purchase_frequency",
+    "no_history",
+    "age_missing",
+    "gender"
+  ],
+  "config": {
+    "seed": 42,
+    "iterations": 250,
+    "value": 100.0,
+    "cost": 2.0,
+    "currency": "RUB",
+    "propensity_assumption": 0.5,
+    "fractions": [
+      0.1,
+      0.2,
+      0.3,
+      0.5,
+      0.7,
+      1.0
+    ]
+  },
+  "features_sha256": "07be4de5b870227be3f20f826a2617011bbee012866747cbc4359f697d69564c",
+  "versions": {
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "duckdb": "1.5.6",
+    "catboost": "1.2.10",
+    "scikit-uplift": "0.5.1",
+    "scikit-learn": "1.6.1"
+  }
+}
