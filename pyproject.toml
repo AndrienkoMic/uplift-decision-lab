@@ -1,0 +1,24 @@
+[project]
+name = "uplift-decision-lab"
+version = "0.1.0"
+description = "From a randomized email experiment to a defensible targeting decision"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "numpy>=1.26,<3", "pandas>=2.2,<3", "scipy>=1.12,<2",
+  "scikit-learn>=1.4,<1.7", "scikit-uplift==0.5.1",
+  "catboost>=1.2.5,<1.3", "matplotlib>=3.8,<4",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<9", "ruff>=0.9", "nbclient>=0.10", "ipykernel>=6", "nbformat>=5"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = [".uv-cache", ".python-runtime"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

@@ -1,0 +1,15 @@
+.venv/
+.uv-cache/
+.python-runtime/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+data/
+reports/holdout_predictions.csv
+reports/splits.csv
+*.egg-info/
+
+.git-initial/
+.token-optimizer/
+.repro-check/
