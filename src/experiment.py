@@ -40,9 +40,9 @@ def randomization_check(frame):
     }
 
 
-def balance_table(frame):
+def balance_table(frame, features=None):
     rows = []
-    for col in PRE_TREATMENT:
+    for col in PRE_TREATMENT if features is None else features:
         if pd.api.types.is_numeric_dtype(frame[col]):
             a, b = frame.loc[frame.treatment == 1, col], frame.loc[frame.treatment == 0, col]
             scale = np.sqrt((a.var(ddof=1) + b.var(ddof=1)) / 2)

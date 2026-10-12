@@ -6,7 +6,7 @@ from sklift.models import SoloModel, TwoModels
 from src.features import CATEGORICAL
 
 
-def estimator(seed, iterations):
+def estimator(seed, iterations, categorical=None):
     return CatBoostClassifier(
         iterations=iterations,
         depth=4,
@@ -16,19 +16,19 @@ def estimator(seed, iterations):
         verbose=False,
         allow_writing_files=False,
         thread_count=2,
-        cat_features=CATEGORICAL,
+        cat_features=CATEGORICAL if categorical is None else categorical,
     )
 
 
-def fit_models(x, y, treatment, seed=42, iterations=250):
+def fit_models(x, y, treatment, seed=42, iterations=250, categorical=None):
     # No class weighting: it would distort probabilities used in treatment differences.
-    s = SoloModel(estimator(seed, iterations), method="dummy").fit(x, y, treatment)
+    s = SoloModel(estimator(seed, iterations, categorical), method="dummy").fit(x, y, treatment)
     t = TwoModels(
-        estimator_trmnt=estimator(seed, iterations),
-        estimator_ctrl=estimator(seed + 1, iterations),
+        estimator_trmnt=estimator(seed, iterations, categorical),
+        estimator_ctrl=estimator(seed + 1, iterations, categorical),
         method="vanilla",
     ).fit(x, y, treatment)
-    response = estimator(seed + 2, iterations)
+    response = estimator(seed + 2, iterations, categorical)
     response.fit(x.loc[treatment == 0], y.loc[treatment == 0])
     return {"s_learner": s, "t_learner": t, "response_baseline": response}
 
