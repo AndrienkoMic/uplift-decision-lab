@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 from src.data import binary_experiment, load_data, split_data, validate_data
+from src.economics import write_economics
 from src.evaluation import get_qini, ranking_metrics
 from src.experiment import ate, balance_table, randomization_check
 from src.features import make_features
@@ -397,6 +398,9 @@ def main():
     figures(out, test, scores, policies, balance)
     decision = write_report(out, summary, policies, metrics)
     summary["decision"] = decision
+    summary["economics"] = write_economics(
+        out, candidates, scores, test.conversion, test.treatment, args.value, args.cost, "USD"
+    )
     (out / "summary.json").write_text(
         json.dumps(summary, indent=2, allow_nan=False), encoding="utf-8"
     )

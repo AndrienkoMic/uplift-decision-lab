@@ -12,6 +12,7 @@ from scipy.stats import chisquare
 
 from run import FRACTIONS, ROOT, figures, make_mask, markdown_table
 from src.data import split_data
+from src.economics import write_economics
 from src.evaluation import ranking_metrics
 from src.experiment import ate, balance_table
 from src.models import fit_models, predict_scores
@@ -307,6 +308,9 @@ def main():
     audit.to_csv(out / "holdout_predictions.csv")
     figures(out, test, scores, policies, balance, currency="RUB", channel="contact")
     write_report(out, summary, policies, metrics, segments)
+    summary["economics"] = write_economics(
+        out, candidates, scores, test.conversion, test.treatment, args.value, args.cost, "RUB"
+    )
     (out / "summary.json").write_text(
         json.dumps(summary, indent=2, allow_nan=False), encoding="utf-8"
     )

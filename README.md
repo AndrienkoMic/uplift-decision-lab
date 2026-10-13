@@ -194,6 +194,20 @@ training features, with exploratory outcome differences evaluated on test. The s
 purchase history before communication but does not give a verifiable campaign cutoff or exact
 outcome-window duration; neither is invented by this project.
 
+## Economic decision maps
+
+Both runners also generate a validation-selected policy/coverage map, a held-out scenario-value
+map with pointwise uncertainty markers, and break-even contact-cost tables. Models fit once;
+each scenario selects its rule on validation before evaluating it on test.
+
+- [Hillstrom economic report](reports/economics_report.md) (USD)
+- [X5 economic report](reports/x5/economics_report.md) (RUB)
+- [Development plan and completion criteria](docs/development_plan.md)
+
+The grid is a retrospective exploratory extension after the original test inspection.
+Scenarios share customers and models; they are not independent experiments. The test heatmap
+does not choose the policy. Costs and purchase contribution remain explicit assumptions.
+
 ## Verification
 
 ```sh
