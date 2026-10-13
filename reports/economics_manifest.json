@@ -1,0 +1,23 @@
+{
+  "values": [
+    10,
+    20,
+    50,
+    100,
+    200
+  ],
+  "costs": [
+    0,
+    0.05,
+    0.1,
+    0.5,
+    1,
+    2
+  ],
+  "currency": "USD",
+  "selection": "validation IPW net-value point estimate; candidate-order ties",
+  "test_role": "evaluate locked scenario plans, no reselection",
+  "evidence_status": "Exploratory extension after original holdout inspection",
+  "validation_candidates_sha256": "00524e98dd0e7ca74cf34760321feb73dafb86104b5d8f410111ebb48643bad2",
+  "grid_sha256": "d708ce08758d63a136baf02743b820a129744f10593549197103e3e814dc6a43"
+}

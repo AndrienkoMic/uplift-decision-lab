@@ -107,3 +107,8 @@ independent test. Synthetic test fixtures are used only in unit tests, never in 
 Sources: [Hillstrom original challenge](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html),
 [dataset documentation](https://www.uplift-modeling.com/en/latest/api/datasets/fetch_hillstrom.html),
 [scikit-uplift metrics](https://www.uplift-modeling.com/en/latest/api/metrics/index.html).
+
+
+## Economic scenarios
+
+See the [economic decision map](economics_report.md) for validation-selected rules across assumed contact costs and purchase contributions, holdout uncertainty and break-even costs. This is an exploratory extension after original holdout inspection.
