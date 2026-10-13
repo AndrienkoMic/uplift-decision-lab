@@ -145,3 +145,8 @@ Raw data, customer features, split IDs and prediction exports stay local and are
 Sources: [organizer data page](https://ods.ai/competitions/x5-retailhero-uplift-modeling/data),
 [scikit-uplift dataset documentation](https://www.uplift-modeling.com/en/latest/api/datasets/fetch_x5.html),
 [loader with source checksums](https://github.com/maks-sh/scikit-uplift/blob/master/sklift/datasets/datasets.py).
+
+
+## Economic scenarios
+
+See the [economic decision map](economics_report.md) for validation-selected rules across assumed contact costs and purchase contributions, holdout uncertainty and break-even costs. This is an exploratory extension after original holdout inspection.

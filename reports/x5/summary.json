@@ -154,5 +154,28 @@
     "catboost": "1.2.10",
     "scikit-uplift": "0.5.1",
     "scikit-learn": "1.6.1"
+  },
+  "economics": {
+    "values": [
+      25,
+      50,
+      100,
+      200,
+      500
+    ],
+    "costs": [
+      0,
+      0.5,
+      1,
+      2,
+      5,
+      10
+    ],
+    "currency": "RUB",
+    "selection": "validation IPW net-value point estimate; candidate-order ties",
+    "test_role": "evaluate locked scenario plans, no reselection",
+    "evidence_status": "Exploratory extension after original holdout inspection",
+    "validation_candidates_sha256": "c41c3f1925bd0370f4d18b461eef69e4f79fbeb79155bab798e743a3c3bb9562",
+    "grid_sha256": "ced3c00e99d906430c31348600156ed0a41a48e920edcc215cc456b85705dc6d"
   }
 }
